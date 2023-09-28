@@ -2,7 +2,7 @@
 //A. Create an array with the values (1, 2, 3, 4, 5, 6, 7) and shuffle it.
 import java.util.*;
 
-public class Asses1a {
+public class RandomShuffle {
     public static void main(String[] args) {
         int[] arr = { 1, 2, 3, 4, 5, 6, 7 };
         Random random = new Random();
