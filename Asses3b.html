@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Survey Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+
+        input[type="date"],
+        .gender {
+            width: 50%;
+            padding: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            gap: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: green;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #reset {
+            background-color: rgb(175, 30, 30);
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+
+        .form-field {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Survey Form</h2>
+        <form id="surveyForm" onsubmit="return submitForm()">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" placeholder="First Name" name="firstName" required>
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" placeholder="Last Name" name="lastName" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" required>
+
+            <label for="country">Country:</label>
+            <select id="country" name="country" required>
+                <option value="select"></option>
+                <option value="India">India</option>
+                <option value="USA">United States of America</option>
+                <option value="United Kingdom">United Kingdom</option>
+                <option value="Germany">Germany</option>
+                <option value="France">France</option>
+                <option value="Geneva">Geneva</option>
+                <option value="Ireland">Ireland</option>
+            </select>
+
+            <label>Gender:</label>
+            <div class="gender">
+                <input type="radio" id="male" name="gender" value="Male">
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="Female">
+                <label for="female">Female</label>
+            </div>
+            <label for="profession">Profession:</label>
+            <input type="text" id="profession" name="profession" required>
+
+            <label for="mobile">Mobile Number:</label>
+            <input type="tel" id="mobile" name="mobile" required><br>
+
+            <button type="submit">Submit</button>
+            <button id="reset" type="reset">Reset</button>
+        </form>
+    </div>
+
+    <script>
+        function submitForm() {
+            // Get form values
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const dob = document.getElementById('dob').value;
+            const country = document.getElementById('country').value;
+            const genderCheckboxes = document.querySelectorAll('input[name="gender"]:checked');
+            const profession = document.getElementById('profession').value;
+            const email = document.getElementById('email').value;
+            const mobile = document.getElementById('mobile').value;
+
+            if (genderCheckboxes.length === 0) {
+                alert('Please select a gender.');
+                return false;
+            }
+
+            let selectedValues = `First Name: ${firstName}\n`;
+            selectedValues += `Last Name: ${lastName}\n`;
+            selectedValues += `Email: ${email}\n`;
+            selectedValues += `Date of Birth: ${dob}\n`;
+            selectedValues += `Country: ${country}\n`;
+            selectedValues += `Gender: ${Array.from(genderCheckboxes).map(checkbox => checkbox.value).join(', ')}\n`;
+            selectedValues += `Profession: ${profession}\n`;
+            selectedValues += `Mobile Number: ${mobile}\n`;
+
+            alert('Selected Values:\n' + selectedValues);
+
+            resetForm();
+
+            return false;
+        }
+
+        function resetForm() {
+            document.getElementById('surveyForm').reset();
+        }
+    </script>
+</body>
+
+</html>
